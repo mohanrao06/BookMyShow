@@ -1,0 +1,39 @@
+# Compiled object files
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Executable files
+*.exe
+*.out
+*.app
+
+# Backup and temporary files
+*~
+*.swp
+*.tmp
+*.log
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.code-workspace
+
+# CMake / build folders (if you use CMake)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+
+# Mac / Windows specific files
+.DS_Store
+Thumbs.db
+
+# User-specific files
+*.user
+*.suo
