@@ -1,16 +1,67 @@
 #include "BookMyShowApp.h"
 #include<iostream>
 #include<limits> 
+#include <fstream>    // NEW: For file stream operations
+#include <sstream>
+#include<vector>
+
+
+
 
 BookMyShowApp::BookMyShowApp(){
-    movies.emplace(101,Movie(101,"KGF1","7:00 AM",148));
-    movies.emplace(102, Movie(102, "KGF2", "9:30 PM", 136));
+    movies.emplace(101, Movie(101, "Inception", "7:00 PM", 148)); 
+    movies.emplace(102, Movie(102, "The Matrix", "9:30 PM", 136));
 
+    // Theatres were not the source of the crash, but let's keep them for testing.
     theatres.emplace("T01", Theatre("T01", "PVR Screen 3"));
     theatres.emplace("T02", Theatre("T02", "Cineplex Grande"));
-    std::cout << "\n[System Status: Initial data loaded]\n";
+    
+    loadData(); // This is still running, but the app won't crash if it fails
+    
+    std::cout << "\n[System Status: Data Loaded]\n";
+    
 
 
+}
+void BookMyShowApp::loadData(){
+    std::cout << "Loading data...\n";
+
+    std::ifstream movieFile("data/movies.txt");
+    std::string line;
+    int count=0;
+    if(movieFile.is_open()){
+        while(std::getline(movieFile,line)){
+            if(line.empty() || line.find_first_not_of(' ') == std::string::npos)continue;
+
+            Movie m=Movie::fromCSV(line);
+
+
+            movies.emplace(m.getId(),m);
+            count++;
+        }
+        movieFile.close();
+        std::cout<<"-> Loaded " << count << " movies.\n";
+        
+    }else{
+        std::cerr << "Warning: data/movies.txt not found. Starting with 0 movies.\n";
+
+    }
+}
+void BookMyShowApp::saveData(){
+    std::cout<<"Saving data...\n";
+
+
+    std::ofstream movieFiles(MOVIE_FILE);
+    if(movieFiles.is_open()){
+        for(const auto& pair:movies){
+            movieFiles<<pair.second.toCSV()<<"\n";
+        }
+        movieFiles.close();
+        std::cout << "-> Saved " << movies.size() << " movies.\n";
+
+    }else {
+        std::cerr << "Error: Could not open " << MOVIE_FILE << " for writing.\n";
+    }
 }
 void BookMyShowApp::viewMovies()const{
     std::cout<< "\n --- Available Movies --- \n";
@@ -60,7 +111,7 @@ void BookMyShowApp::runMenu(){
             case 2:viewTheatres();break;
             case 3: std::cout << "Admin/Login functionality coming soon...\n"; break;
             case 4: 
-                // saveData(); // Will be implemented in Step 5
+                saveData(); // Will be implemented in Step 5
                 std::cout << "Exiting BookMyShow. Goodbye!\n"; 
                 break;
             default: std::cout << "Choice not recognized. Please try again.\n";
@@ -68,3 +119,5 @@ void BookMyShowApp::runMenu(){
 
     }while(choice!=4);
 }
+
+

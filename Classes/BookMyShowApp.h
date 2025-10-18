@@ -3,7 +3,8 @@
 #include<map>
 #include "Movie.h"  
 #include "Theatre.h"
-
+const std::string MOVIE_FILE = "data/movies.txt";
+const std::string THEATRE_FILE = "data/theatres.txt";
 class BookMyShowApp{
     private:
         std::map<int,Movie> movies;

@@ -14,6 +14,9 @@ class Movie{
        Movie(int id, const std::string& t, const std::string& st, int dur);
 
         void displayInfo() const;
+        std::string toCSV()const;
+        int getId()const {return movieId;}
+        static Movie fromCSV(const std::string& csvLine);
 };
 
 #endif
