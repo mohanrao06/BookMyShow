@@ -2,6 +2,7 @@
 #include <iostream>
 #include<vector>
 #include <sstream>
+#include "Utils.h"
 
 std::vector<std::string> splitString(const std::string& str, char delimiter){
     std::vector<std::string> tokens;
