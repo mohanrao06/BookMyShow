@@ -10,5 +10,8 @@ class Seat{
         Seat(const std::string& label);
 
         void displayStatus()const;
+        bool isSeatBooked() const { return isBooked; }
+        void setBooked(bool status) { isBooked = status; }
+        std::string getLabel() const { return seatLabel; }
 };
 #endif

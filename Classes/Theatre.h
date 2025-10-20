@@ -16,6 +16,9 @@ class Theatre{
         Theatre(const std::string& id,const std::string& n);
         void displaySeats() const;
         std::string getName()const{return name;}
+        
+        bool bookSeat(const std::string& seatLabel);
+        bool unbookSeat(const std::string& seatLabel);
 
 
 

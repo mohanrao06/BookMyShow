@@ -26,3 +26,33 @@ void Theatre::displaySeats() const{
         }
     }
 }
+bool Theatre::bookSeat(const std::string& seatLabel) {
+   
+    for (auto& seat : seats) { 
+
+        if (seat.getLabel() == seatLabel) {
+            
+            if (seat.isSeatBooked()) {
+                std::cout << "Error: Seat " << seatLabel << " is already booked (X).\n";
+                return false;
+            }
+            
+            seat.setBooked(true);
+            return true;
+        }
+    }
+    std::cout << "Error: Seat " << seatLabel << " not found in theatre " << name << ".\n";
+    return false; // Seat label was invalid
+}
+bool Theatre::unbookSeat(const std::string& seatLabel) {
+    // Iterate through all seats in the vector
+    for (auto& seat : seats) { 
+        // We use getLabel() and setBooked() from the Seat class
+        if (seat.getLabel() == seatLabel) { 
+            // Mark the seat as free (false)
+            seat.setBooked(false); 
+            return true; // Success
+        }
+    }
+    return false; // Seat label was not found
+}
