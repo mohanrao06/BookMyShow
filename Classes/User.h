@@ -21,6 +21,7 @@ class User{
 
     std::string toCSV() const;
     static User fromCSV(const std::string& csvLine);
+    bool isAdmin() const { return role == "ADMIN"; }
 };
 
 #endif

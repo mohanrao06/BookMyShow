@@ -32,6 +32,12 @@ class BookMyShowApp{
         User* userLogin();
         void showAuthMenu();
         void bookTicketFlow();
+        void viewMyBookings() const;
+
+        void adminMenu();
+        void addMovie();
+        void viewAllBookings() const;
+        void addTheatre();
 
 };
 

@@ -1,1 +1,2 @@
-U1,venkey,123,USER
+U1,venkey,123,ADMIN
+U2,navya,123,USER
